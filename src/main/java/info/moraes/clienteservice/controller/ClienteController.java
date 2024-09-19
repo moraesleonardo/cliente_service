@@ -18,17 +18,22 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
+    // Novo endpoint para status
+    @GetMapping("/status")
+    public ResponseEntity<String> status() {
+        return ResponseEntity.ok("O serviço está ativo - Instância 1");
+    }
 
     @GetMapping
     public List<Cliente> getAllClientes(){
         return clienteService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Cliente> getClienteById(@PathVariable int id){
-        Optional<Cliente> cliente = clienteService.findById(id);
-        return cliente.isPresent() ? ResponseEntity.ok(cliente.get()) : ResponseEntity.notFound().build();
-    }
+    //@GetMapping("/{id}")
+    //public ResponseEntity<Cliente> getClienteById(@PathVariable int id){
+    //    Optional<Cliente> cliente = clienteService.findById(id);
+    //    return cliente.isPresent() ? ResponseEntity.ok(cliente.get()) : ResponseEntity.notFound().build();
+    //}
 
     @PostMapping
     public Cliente addCliente(@RequestBody Cliente cliente){
